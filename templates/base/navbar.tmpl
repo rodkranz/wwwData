@@ -1,0 +1,20 @@
+<div class="masthead clearfix">
+    <div class="inner">
+        <h3 class="masthead-brand">
+            <a href="/">{{AppName}}</a>
+        </h3>
+        <nav>
+            <ul class="nav masthead-nav">
+                <li {{if .PageIsHome }}class="active"{{end}}><a href="{{.AppUrl}}/">{{.i18n.Tr "app.navbar_home"}}</a></li>
+                <li {{if .PageIsAbout }}class="active"{{end}}><a href="{{.AppUrl}}/about">{{.i18n.Tr "app.navbar_about"}}</a></li>
+                <li><a target="_blank" href="https://github.com/rodkranz/wwwData">{{.i18n.Tr "app.navbar_github"}}</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+
+
+
+

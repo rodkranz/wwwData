@@ -1,0 +1,43 @@
+{{/*
+<html>
+    <body>
+    <div class="site-wrapper">
+        <div class="site-wrapper-inner">
+            <div class="cover-container">
+                */}}
+                <div class="mastfoot">
+                    <div class="inner">
+                        <p>
+                            {{.i18n.Tr "app.footer_page"}}: <strong>{{LoadTimes .PageStartTime}}</strong> |
+                            {{.i18n.Tr "app.footer_template"}}: <strong>{{call .TmplLoadTimes}}</strong> |
+                            <a target="_blank" href="https://golang.org/dl/#{{GoVer | ToLower}}">{{GoVer}}</a>
+                        </p>
+
+                        <div class="btn-group dropup" style="display: inline-table;">
+                            <button type="button" class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                {{.LangName}}
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li class="dropdown-header">{{ .i18n.Tr "app.languages_available"}}</li>
+                                {{range .AllLangs}}
+                                <li class="item {{if eq $.Lang .Lang}}active selected{{end}}">
+                                    <a href="{{if eq $.Lang .Lang}}#{{else}}{{$.Link}}?lang={{.Lang}}{{end}}">{{.Name}}</a>
+                                </li>
+                                {{end}}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+    </body>
+</html>
