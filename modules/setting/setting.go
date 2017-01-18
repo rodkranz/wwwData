@@ -4,18 +4,18 @@
 package setting
 
 import (
-	"os/exec"
+	"log"
+	"net/url"
 	"os"
+	"os/exec"
+	"path"
 	"path/filepath"
 	"runtime"
-	"log"
 	"strings"
-	"net/url"
-	"path"
 
-	"gopkg.in/ini.v1"
 	"github.com/Unknwon/com"
 	"github.com/go-macaron/session"
+	"gopkg.in/ini.v1"
 	"strconv"
 )
 
@@ -60,6 +60,12 @@ var (
 	CacheAdapter  string
 	CacheInterval int
 	CacheConn     string
+
+	// Database settings
+	UseSQLite3    bool
+	UseMySQL      bool
+	UsePostgreSQL bool
+	UseTiDB       bool
 
 	// Session settings
 	SessionConfig  session.Options
@@ -176,7 +182,7 @@ func NewContext() {
 
 	sec = Cfg.Section("server")
 	AppUrl = sec.Key("ROOT_URL").MustString("http://localhost:9090/")
-	if AppUrl[len(AppUrl) - 1] != '/' {
+	if AppUrl[len(AppUrl)-1] != '/' {
 		AppUrl += "/"
 	}
 

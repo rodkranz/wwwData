@@ -9,8 +9,8 @@ import (
 
 	"gopkg.in/urfave/cli.v2"
 
-	"github.com/rodkranz/tmp/cmd"
-	"github.com/rodkranz/tmp/modules/setting"
+	"github.com/rodkranz/wwwData/cmd"
+	"github.com/rodkranz/wwwData/modules/setting"
 )
 
 const VER = "1.0.0"
@@ -22,8 +22,8 @@ func init() {
 
 func main() {
 	app := cli.App{
-		Name: "wwwBase",
-		Usage: "Base for create a webapp with go mocarron",
+		Name:    "wwwBase",
+		Usage:   "Base for create a webapp with go mocarron",
 		Version: VER,
 		Commands: []*cli.Command{
 			cmd.Server,

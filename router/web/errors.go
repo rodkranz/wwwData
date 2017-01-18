@@ -4,10 +4,10 @@
 package web
 
 import (
-	"github.com/rodkranz/tmp/modules/base"
-	"github.com/rodkranz/tmp/modules/context"
-	"net/http"
 	"fmt"
+	"github.com/rodkranz/wwwData/modules/base"
+	"github.com/rodkranz/wwwData/modules/context"
+	"net/http"
 )
 
 const (
@@ -23,4 +23,3 @@ func NotFound(ctx *context.Context) {
 
 	ctx.HTML(404, Error404)
 }
-

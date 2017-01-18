@@ -4,22 +4,22 @@
 package context
 
 import (
-	"html/template"
-	"time"
-	"strings"
 	"fmt"
+	"html/template"
 	"io"
 	"net/http"
+	"strings"
+	"time"
 
-	"gopkg.in/macaron.v1"
+	"github.com/go-macaron/cache"
+	"github.com/go-macaron/csrf"
 	"github.com/go-macaron/i18n"
 	"github.com/go-macaron/session"
-	"github.com/go-macaron/csrf"
-	"github.com/go-macaron/cache"
+	"gopkg.in/macaron.v1"
 
-	"github.com/rodkranz/tmp/modules/setting"
-	"github.com/rodkranz/tmp/modules/base"
-	"github.com/rodkranz/tmp/modules/log"
+	"github.com/rodkranz/wwwData/modules/base"
+	"github.com/rodkranz/wwwData/modules/log"
+	"github.com/rodkranz/wwwData/modules/setting"
 )
 
 type Context struct {
@@ -73,7 +73,7 @@ func (ctx *Context) HTML(status int, name base.TplName) {
 // RenderWithErr used for page has form validation but need to prompt error to users.
 func (ctx *Context) RenderWithErr(msg string, tpl base.TplName, form interface{}) {
 	if form != nil {
-//		validate.AssignForm(form, ctx.Data)
+		//		validate.AssignForm(form, ctx.Data)
 	}
 
 	ctx.Flash.ErrorMsg = msg

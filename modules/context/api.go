@@ -8,9 +8,9 @@ import (
 
 	"gopkg.in/macaron.v1"
 
-	"github.com/rodkranz/tmp/modules/base"
-	"github.com/rodkranz/tmp/modules/log"
-	"github.com/rodkranz/tmp/modules/setting"
+	"github.com/rodkranz/wwwData/modules/base"
+	"github.com/rodkranz/wwwData/modules/log"
+	"github.com/rodkranz/wwwData/modules/setting"
 )
 
 type APIContext struct {
@@ -55,7 +55,7 @@ func APIContexter() macaron.Handler {
 		}
 
 		ctx.Resp.Header().Set("Content-Type", "application/json; charset=UTF-8")
-		ctx.Resp.Header().Set("Server", setting.AppName + " - " + runtime.Version())
+		ctx.Resp.Header().Set("Server", setting.AppName+" - "+runtime.Version())
 		ctx.Resp.Header().Set("Developer", "Rodrigo Lopes")
 
 		if setting.AllowCrossDomain {

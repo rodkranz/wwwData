@@ -4,13 +4,13 @@
 package template
 
 import (
-	"strings"
-	"runtime"
-	"time"
 	"html/template"
+	"runtime"
+	"strings"
+	"time"
 
-	"github.com/rodkranz/tmp/modules/setting"
 	"fmt"
+	"github.com/rodkranz/wwwData/modules/setting"
 )
 
 func NewFuncMap() []template.FuncMap {
@@ -42,8 +42,8 @@ func NewFuncMap() []template.FuncMap {
 		"LoadTimes": func(startTime time.Time) string {
 			return fmt.Sprint(time.Since(startTime).Nanoseconds()/1e6) + "ms"
 		},
-		"ToLower":        strings.ToLower,
-		"DateTime":       DateTime,
+		"ToLower":  strings.ToLower,
+		"DateTime": DateTime,
 	}}
 }
 

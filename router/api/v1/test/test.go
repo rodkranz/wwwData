@@ -6,7 +6,7 @@ package test
 import (
 	"net/http"
 
-	"github.com/rodkranz/tmp/modules/context"
+	"github.com/rodkranz/wwwData/modules/context"
 )
 
 func Hello(ctx *context.APIContext) {

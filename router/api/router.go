@@ -7,8 +7,8 @@ import (
 	"gopkg.in/macaron.v1"
 	//"github.com/go-macaron/binding"
 
-	"github.com/rodkranz/tmp/modules/context"
-	"github.com/rodkranz/tmp/router/api/v1/test"
+	"github.com/rodkranz/wwwData/modules/context"
+	"github.com/rodkranz/wwwData/router/api/v1/test"
 )
 
 // Contexter middleware already checks token for user sign in process.
@@ -29,7 +29,6 @@ func reqBasicAuth() macaron.Handler {
 		}
 	}
 }
-
 
 func RegisterRoutes(m *macaron.Macaron) {
 	//bind := binding.Bind

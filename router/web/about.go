@@ -6,9 +6,9 @@ package web
 import (
 	"net/http"
 
-	"github.com/rodkranz/tmp/modules/base"
-	"github.com/rodkranz/tmp/modules/context"
-	"github.com/rodkranz/tmp/modules/setting"
+	"github.com/rodkranz/wwwData/modules/base"
+	"github.com/rodkranz/wwwData/modules/context"
+	"github.com/rodkranz/wwwData/modules/setting"
 )
 
 const (

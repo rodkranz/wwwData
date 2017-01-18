@@ -6,10 +6,10 @@ package setting
 import (
 	"strings"
 
-	"github.com/rodkranz/tmp/modules/log"
 	"fmt"
-	"path"
+	"github.com/rodkranz/wwwData/modules/log"
 	"os"
+	"path"
 )
 
 func NewServices() {
@@ -30,7 +30,6 @@ func newCacheService() {
 
 	log.Info("Cache Service Enabled")
 }
-
 
 var logLevels = map[string]string{
 	"Trace":    "0",

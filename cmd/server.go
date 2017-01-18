@@ -4,47 +4,34 @@
 package cmd
 
 import (
-	"net/http"
-	"path"
-	"io/ioutil"
-	"fmt"
-	"strings"
 	"crypto/tls"
+	"fmt"
+	"net"
+	"net/http"
 	"net/http/fcgi"
 	"os"
-	"net"
+	"path"
+	"strings"
 
+	"github.com/go-macaron/cache"
+	"github.com/go-macaron/csrf"
+	"github.com/go-macaron/gzip"
+	"github.com/go-macaron/i18n"
+	"github.com/go-macaron/session"
 	"gopkg.in/macaron.v1"
 	"gopkg.in/urfave/cli.v2"
-	"github.com/go-macaron/gzip"
-	"github.com/go-macaron/session"
-	"github.com/go-macaron/csrf"
-	"github.com/go-macaron/cache"
-	"github.com/go-macaron/i18n"
 
-	"github.com/rodkranz/tmp/modules/context"
-	"github.com/rodkranz/tmp/modules/template"
-	"github.com/rodkranz/tmp/modules/setting"
-	"github.com/rodkranz/tmp/modules/log"
-	"github.com/rodkranz/tmp/modules/bindata"
-	"github.com/rodkranz/tmp/router"
+	"github.com/rodkranz/wwwData/modules/bindata"
+	"github.com/rodkranz/wwwData/modules/context"
+	"github.com/rodkranz/wwwData/modules/log"
+	"github.com/rodkranz/wwwData/modules/setting"
+	"github.com/rodkranz/wwwData/modules/template"
+	"github.com/rodkranz/wwwData/router"
 
-	routerWeb "github.com/rodkranz/tmp/router/web"
-	routerApi "github.com/rodkranz/tmp/router/api"
+	"github.com/rodkranz/wwwData/modules/verify"
+	routerApi "github.com/rodkranz/wwwData/router/api"
+	routerWeb "github.com/rodkranz/wwwData/router/web"
 )
-
-// checkVersion checks if binary matches the version of templates files.
-func checkVersion() {
-	// Templates.
-	data, err := ioutil.ReadFile(setting.StaticRootPath + "/templates/.VERSION")
-	if err != nil {
-		log.Fatal(4, "Fail to read 'templates/.VERSION': %v", err)
-	}
-
-	if string(data) != setting.AppVer {
-		log.Fatal(4, "Binary and template file version does not match, did you forget to recompile?")
-	}
-}
 
 var Server = &cli.Command{
 	Name:        "server",
@@ -130,7 +117,8 @@ func runServer(ctx *cli.Context) error {
 	if ctx.IsSet("config") {
 		setting.CustomConf = ctx.String("config")
 	}
-	router.GlobalInit()
+	routers.GlobalInit()
+	verify.CheckVersion()
 
 	m := newMacaron()
 
