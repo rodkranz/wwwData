@@ -4,19 +4,21 @@
 package setting
 
 import (
-	"log"
 	"net/url"
 	"os"
 	"os/exec"
 	"path"
 	"path/filepath"
 	"runtime"
+	"strconv"
 	"strings"
 
 	"github.com/Unknwon/com"
 	"github.com/go-macaron/session"
 	"gopkg.in/ini.v1"
-	"strconv"
+
+	"github.com/rodkranz/wwwData/modules/bindata"
+	"github.com/rodkranz/wwwData/modules/log"
 )
 
 type Scheme string
@@ -113,11 +115,11 @@ func execPath() (string, error) {
 
 func init() {
 	IsWindows = runtime.GOOS == "windows"
-	//log.NewLogger(0, "console", `{"level": 0}`)
+	log.NewLogger(0, "console", `{"level": 0}`)
 
 	var err error
 	if AppPath, err = execPath(); err != nil {
-		//		log.Fatal(4, "fail to get app path: %v\n", err)
+				log.Fatal(4, "fail to get app path: %v\n", err)
 	}
 
 	// Note: we don't use path.Dir here because it does not handle case
@@ -153,7 +155,7 @@ func NewContext() {
 		log.Fatal(4, "Fail to get work directory: %v", err)
 	}
 
-	Cfg, err = ini.Load("conf/app.ini")
+	Cfg, err = ini.Load(bindata.MustAsset("conf/app.ini"))
 	if err != nil {
 		log.Fatal(4, "Fail to parse 'conf/app.ini': %v", err)
 	}
@@ -169,10 +171,10 @@ func NewContext() {
 
 	if com.IsFile(CustomConf) {
 		if err = Cfg.Append(CustomConf); err != nil {
-			//			log.Fatal(4, "Fail to load custom conf '%s': %v", CustomConf, err)
+			log.Fatal(4, "Fail to load custom conf '%s': %v", CustomConf, err)
 		}
 	} else {
-		//log.Warn("Custom config '%s' not found, ignore this if you're running first time", CustomConf)
+		log.Warn("Custom config '%s' not found, ignore this if you're running first time", CustomConf)
 	}
 	Cfg.NameMapper = ini.AllCapsUnderscore
 
@@ -189,7 +191,7 @@ func NewContext() {
 	// Check if has app suburl.
 	surl, err := url.Parse(AppUrl)
 	if err != nil {
-		//log.Fatal(4, "Invalid ROOT_URL '%s': %s", AppUrl, err)
+		log.Fatal(4, "Invalid ROOT_URL '%s': %s", AppUrl, err)
 	}
 
 	// Suburl should start with '/' and end without '/', such as '/{subpath}'.
